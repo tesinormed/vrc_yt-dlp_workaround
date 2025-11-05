@@ -1,10 +1,12 @@
 [package]
 name = "vrc_yt-dlp_workaround"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 publish = false
 
 [dependencies]
-anyhow = "1.0"
+anyhow = "1.0.100"
 dialoguer = "0.12.0"
-reqwest = { version = "0.12", features = ["blocking"] }
+reqwest = { version = "0.12.24", features = ["blocking"] }
+tempfile = "3.23.0"
+zip = "6.0.0"

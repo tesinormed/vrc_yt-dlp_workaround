@@ -14,7 +14,6 @@ Fixes broken YouTube videos in VRChat by:
 3. Use your arrow keys to select the browser, then press `Enter`.
 4. If the program says "Done!", you may close the window.
 
-
 ## Copyright
 Licensed under [CC0 1.0 Universal].
 
