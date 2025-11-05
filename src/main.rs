@@ -4,6 +4,7 @@ use std::io::Write;
 use std::thread::sleep;
 use std::time::Duration;
 use std::{env, io, panic};
+use std::process::Command;
 use tempfile::tempfile;
 use zip::ZipArchive;
 
@@ -83,13 +84,11 @@ fn main() -> anyhow::Result<()> {
 		.set_permissions(exe_file_permissions)
 		.expect("failed to set permissions on yt-dlp.exe");
 
-	/*
 	// set DACLs on yt-dlp.exe
 	Command::new("icacls")
 		.args([&exe_path, "/setintegritylevel", "medium", "/inheritance:d"])
 		.output()
 		.expect("failed to set DACLs on yt-dlp.exe");
-	 */
 
 	// create deno.exe
 	let deno_path = format!("{tools_dir}deno.exe");
