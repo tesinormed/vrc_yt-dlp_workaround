@@ -13,8 +13,7 @@ const YT_DLP_URL: &str = "https://github.com/yt-dlp/yt-dlp-nightly-builds/releas
 /// Base `yt-dlp.conf`
 const YT_DLP_CONF: &str = r"-t sleep
 --no-playlist
---impersonate safari
---extractor-args youtube:player_client=web
+--extractor-args youtube:player_client=web_safari
 --cookies-from-browser ";
 /// List of browsers that yt-dlp supports for `--cookies-from-browser`
 const YT_DLP_SUPPORTED_BROWSERS: [&str; 9] = [
@@ -86,7 +85,7 @@ fn main() -> anyhow::Result<()> {
 
 	// set DACLs on yt-dlp.exe
 	Command::new("icacls")
-		.args([&exe_path, "/setintegritylevel", "medium", "/inheritance:d"])
+		.args([&exe_path, "/setintegritylevel", "medium", "/inheritancelevel:d"])
 		.output()
 		.expect("failed to set DACLs on yt-dlp.exe");
 
@@ -107,6 +106,12 @@ fn main() -> anyhow::Result<()> {
 	// unzip and write to deno.exe
 	io::copy(&mut ZipArchive::new(deno_zip_file)?.by_index(0)?, &mut deno_file).expect("failed to write to deno.exe");
 	println!("Downloaded deno.exe");
+
+	// set DACLs on deno.exe
+	Command::new("icacls")
+		.args([&deno_path, "/setintegritylevel", "medium", "/inheritancelevel:d"])
+		.output()
+		.expect("failed to set DACLs on deno.exe");
 
 	// done
 	println!("Done! You can close this window.");
